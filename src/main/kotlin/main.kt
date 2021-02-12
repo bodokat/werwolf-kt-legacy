@@ -2,12 +2,25 @@
 import com.kotlindiscord.kord.extensions.ExtensibleBot
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import dev.kord.core.entity.ReactionEmoji
-import io.github.cdimascio.dotenv.Dotenv
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import kotlinx.coroutines.delay
 import lobby.LobbyManager
 
 suspend fun main() {
-    val token = Dotenv.configure().ignoreIfMissing().load()["TOKEN"]
+    // create HTTP Server because Heroku wants one
+    embeddedServer(Netty, port = System.getenv("PORT").toInt()) {
+        routing {
+            get("/") {
+                call.respondText("Nothing to see here")
+            }
+        }
+    }.start(wait = false)
+
+    val token = System.getenv("TOKEN")
     val bot = ExtensibleBot(token, "!")
 
     bot.addExtension {
