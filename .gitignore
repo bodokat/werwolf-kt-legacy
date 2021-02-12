@@ -1,3 +1,11 @@
 # Project exclude paths
 /.gradle/
 /build/
+.idea
+.env
+out
+*.iml
+*.ipr
+*.iws
+.DS_Store
+/.env

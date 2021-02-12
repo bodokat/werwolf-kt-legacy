@@ -1,15 +1,19 @@
 
-import dev.kord.core.Kord
+import com.kotlindiscord.kord.extensions.ExtensibleBot
 import dev.kord.core.entity.ReactionEmoji
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.event.message.MessageCreateEvent
-import dev.kord.core.on
 import io.github.cdimascio.dotenv.Dotenv
 import kotlinx.coroutines.delay
+import lobby.LobbyManager
 
 suspend fun main() {
     val token = Dotenv.load()["TOKEN"]
-    val bot = Kord(token)
+    val bot = ExtensibleBot(token, "!")
+
+    bot.addExtension {
+        LobbyManager(it)
+    }
 
     bot.on<ReadyEvent> {
         print("Ready!")
@@ -25,5 +29,5 @@ suspend fun main() {
         }
     }
 
-    bot.login()
+    bot.start()
 }
