@@ -4,7 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv
 import lobby.LobbyManager
 
 suspend fun main() {
-    val token = Dotenv.load()["TOKEN"]
+    val token = Dotenv.configure().ignoreIfMissing().load()["TOKEN"]
     val bot = ExtensibleBot(token, "!")
 
     bot.addExtension {
