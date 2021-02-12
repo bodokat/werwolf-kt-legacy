@@ -1,1 +1,1 @@
-bot: ./build/install/werwolf/bin/werwolf
+web: ./build/install/werwolf/bin/werwolf
