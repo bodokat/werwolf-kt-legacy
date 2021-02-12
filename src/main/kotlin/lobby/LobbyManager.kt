@@ -23,6 +23,8 @@ class LobbyManager(bot:ExtensibleBot): Extension(bot) {
             name = "join"
             description = "Joins the current lobby (creates a new one if none exists)"
 
+            check { it.message.author?.isBot?.not() ?: false }
+
             action {
                 if (event.guildId == null) {
                     message.channel.createMessage("!join kann nur in einem Server-chat benutzt werden")
@@ -38,6 +40,8 @@ class LobbyManager(bot:ExtensibleBot): Extension(bot) {
             name = "leave"
             description = "leave the current lobby"
 
+            check { it.message.author?.isBot?.not() ?: false }
+
             action {
                 message.author?.let {
                     lobbies[event.guildId]?.players?.remove(it)
@@ -48,6 +52,8 @@ class LobbyManager(bot:ExtensibleBot): Extension(bot) {
         command {
             name = "invite"
             description = "invite all players in the voice channel you're currently in"
+
+            check { it.message.author?.isBot?.not() ?: false }
 
             action {
                 val voiceChannel = event.getGuild()?.let { it.channels.filterIsInstance<VoiceChannel>().firstOrNull { channel -> channel.voiceStates.any { state -> state.userId == message.author?.id } } }

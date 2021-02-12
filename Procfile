@@ -1,0 +1,1 @@
+web: java $java-opts -jar build/libs/werwolf-1.0-SNAPSHOT.jar
