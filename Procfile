@@ -1,1 +1,1 @@
-web: ./build/install/werwolf/bin/werwolf
+worker: ./build/install/werwolf/bin/werwolf

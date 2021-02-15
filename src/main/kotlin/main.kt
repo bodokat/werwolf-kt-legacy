@@ -26,6 +26,9 @@ suspend fun main() {
     bot.addExtension {
         LobbyManager(it)
     }
+    bot.addExtension {
+        PingExtension(it)
+    }
 
     bot.start()
 }
