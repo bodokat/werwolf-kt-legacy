@@ -23,8 +23,6 @@ dependencies {
     implementation("dev.kord:kord-core:0.7.0-SNAPSHOT")
     implementation("com.kotlindiscord.kord.extensions:kord-extensions:1.4.0-RC6")
     testImplementation(kotlin("test-junit"))
-    implementation("io.ktor:ktor-server-core:1.5.1")
-    implementation("io.ktor:ktor-server-netty:1.5.1")
 }
 
 tasks.test {

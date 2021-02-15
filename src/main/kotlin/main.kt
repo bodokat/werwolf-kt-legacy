@@ -2,23 +2,11 @@
 import com.kotlindiscord.kord.extensions.ExtensibleBot
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import dev.kord.core.entity.ReactionEmoji
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import dev.kord.core.event.gateway.ReadyEvent
 import kotlinx.coroutines.delay
 import lobby.LobbyManager
 
 suspend fun main() {
-    // create HTTP Server because Heroku wants one
-    embeddedServer(Netty, port = System.getenv("PORT").toInt()) {
-        routing {
-            get("/") {
-                call.respondText("Nothing to see here")
-            }
-        }
-    }.start(wait = false)
 
     val token = System.getenv("TOKEN")
     val bot = ExtensibleBot(token, "!")
@@ -38,6 +26,10 @@ class PingExtension(bot: ExtensibleBot): Extension(bot) {
     override val name = "ping"
 
     override suspend fun setup() {
+        event<ReadyEvent> {
+            println("Ready!")
+        }
+
         command {
             name = "ping"
 
